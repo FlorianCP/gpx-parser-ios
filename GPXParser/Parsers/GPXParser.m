@@ -41,6 +41,16 @@
         self.currentString = [NSMutableString string];
     }
     
+    // Waypoint name
+    if ([elementName isEqualToString:@"name"] &&  self.waypoint) {
+        self.currentString = [NSMutableString string];
+    }
+    
+    // Waypoint comment
+    if ([elementName isEqualToString:@"cmt"] &&  self.waypoint) {
+        self.currentString = [NSMutableString string];
+    }
+    
     // Route
     if ([elementName isEqualToString:@"rte"]) {
 		if (!self.route) self.route = [Track new];
@@ -73,7 +83,19 @@
     
     // Waypoint name
     if ([elementName isEqualToString:@"desc"] && self.waypoint) {
+        self.waypoint.desc = self.currentString;
+        self.currentString = nil;
+    }
+    
+    // Waypoint name
+    if ([elementName isEqualToString:@"name"] &&  self.waypoint) {
         self.waypoint.name = self.currentString;
+        self.currentString = nil;
+    }
+    
+    // Waypoint comment
+    if ([elementName isEqualToString:@"cmt"] &&  self.waypoint) {
+        self.waypoint.comment = self.currentString;
         self.currentString = nil;
     }
     

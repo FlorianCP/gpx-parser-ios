@@ -11,6 +11,10 @@
 #import "Fix.h"
 
 @interface Waypoint : Fix
+
 @property (nonatomic, strong) NSString *name;
+@property (nonatomic, strong) NSString *desc;
+@property (nonatomic, strong) NSString *comment;
 @property (nonatomic, strong) NSString *type;
+
 @end
