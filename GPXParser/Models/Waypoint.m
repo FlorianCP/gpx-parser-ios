@@ -9,13 +9,35 @@
 #import "Waypoint.h"
 
 @implementation Waypoint
-@synthesize name=_name;
-@synthesize type=_type;
 
 #pragma mark - String
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"<Waypoint (%@ %f %f)>", _name, self.latitude, self.longitude];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [super encodeWithCoder:coder];
+    
+    [coder encodeObject:self.name forKey:@"name"];
+    [coder encodeObject:self.desc forKey:@"desc"];
+    [coder encodeObject:self.comment forKey:@"comment"];
+    [coder encodeObject:self.type forKey:@"type"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder])
+    {
+        _name = [decoder decodeObjectForKey:@"name"];
+        _desc = [decoder decodeObjectForKey:@"desc"];
+        _comment = [decoder decodeObjectForKey:@"comment"];
+        _type = [decoder decodeObjectForKey:@"type"];
+    }
+    return self;
 }
 
 @end

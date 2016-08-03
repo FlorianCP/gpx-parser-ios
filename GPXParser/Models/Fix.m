@@ -9,8 +9,6 @@
 #import "Fix.h"
 
 @implementation Fix
-@synthesize latitude=_latitude;
-@synthesize longitude=_longitude;
 
 #pragma mark - Coordinate
 
@@ -22,6 +20,24 @@
 
 - (NSString *)description {
     return [NSString stringWithFormat:@"<Fix (%f %f)>", _latitude, _longitude];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeDouble:self.latitude forKey:@"latitude"];
+    [coder encodeDouble:self.longitude forKey:@"longitude"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init])
+    {
+        _latitude = [decoder decodeDoubleForKey:@"latitude"];
+        _longitude = [decoder decodeDoubleForKey:@"longitude"];
+    }
+    return self;
 }
 
 @end

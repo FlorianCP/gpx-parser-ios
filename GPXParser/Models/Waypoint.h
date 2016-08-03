@@ -10,7 +10,7 @@
 
 #import "Fix.h"
 
-@interface Waypoint : Fix
+@interface Waypoint : Fix <NSCoding>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *desc;

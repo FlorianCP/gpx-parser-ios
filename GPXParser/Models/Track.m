@@ -7,12 +7,10 @@
 //
 
 #import "Track.h"
+#import "MKPolyline+NSCoding.h"
+
 
 @implementation Track
-@synthesize region=_region;
-@synthesize fixes=_fixes;
-@synthesize path=_path;
-@synthesize shadowPath=_shadowPath;
 
 #pragma mark - Initialization
 
@@ -26,7 +24,33 @@
 #pragma mark - String
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"<Track (fixes %i)>", _fixes.count];
+    return [NSString stringWithFormat:@"<Track (fixes %lu)>", (unsigned long)_fixes.count];
+}
+
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    [coder encodeObject:self.fixes forKey:@"fixes"];
+    [coder encodeObject:self.path forKey:@"path"];
+    [coder encodeObject:self.shadowPath forKey:@"shadowPath"];
+    
+    NSData *regionData = [NSData dataWithBytes:&_region length:sizeof(self.region)];
+    [coder encodeObject:regionData forKey:@"region"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init])
+    {
+        _fixes = [decoder decodeObjectForKey:@"fixes"];
+        _path = [decoder decodeObjectForKey:@"path"];
+        _shadowPath = [decoder decodeObjectForKey:@"shadowPath"];
+        
+        NSData *regionData = [decoder decodeObjectForKey:@"region"];
+        [regionData getBytes:&_region length:sizeof(self.region)];
+    }
+    return self;
 }
 
 @end

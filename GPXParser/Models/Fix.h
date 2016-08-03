@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface Fix : NSObject
+@interface Fix : NSObject <NSCoding>
 @property (nonatomic, assign) double latitude;
 @property (nonatomic, assign) double longitude;
 

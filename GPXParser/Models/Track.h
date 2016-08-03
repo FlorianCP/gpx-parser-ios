@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface Track : NSObject
+@interface Track : NSObject <NSCoding>
 @property (nonatomic, strong) NSMutableArray *fixes;
 @property (nonatomic, strong) MKPolyline *path;
 @property (nonatomic, strong) MKPolyline *shadowPath;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface GPX : NSObject
+@interface GPX : NSObject <NSCoding>
 @property (nonatomic, strong) NSMutableArray *waypoints;
 @property (nonatomic, strong) NSMutableArray *tracks;
 @property (nonatomic, strong) NSMutableArray *routes;
